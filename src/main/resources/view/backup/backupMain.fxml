@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane prefHeight="299.0" prefWidth="420.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="modules.backup.backupController">
+  <bottom>
+    <GridPane>
+      <children>
+        <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#restore" prefHeight="39.0" prefWidth="103.0" text="Restore" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Button contentDisplay="RIGHT" mnemonicParsing="false" onAction="#createBackup" prefHeight="39.0" prefWidth="103.0" text="Backup" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+  </bottom>
+  <center>
+    <ListView fx:id="list" prefHeight="96.0" prefWidth="200.0" />
+  </center>
+  <top>
+    <HBox alignment="CENTER" prefHeight="61.0" prefWidth="420.0">
+      <children>
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Backup" />
+      </children>
+    </HBox>
+  </top>
+</BorderPane>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.text.Text?>
+
+<StackPane prefHeight="600.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="modules.userprofile.controller.UserProfileController">
+  <SplitPane dividerPositions="0.7993311036789298">
+    <items>
+      <BorderPane>
+        <center>
+          <StackPane >
+            <children>
+              <HBox prefHeight="100.0" prefWidth="200.0" fx:id="dataPane"/>
+            </children>
+          </StackPane>
+        </center>
+        <top>
+          <VBox prefHeight="64.0" prefWidth="462.0">
+            <children>
+              <HBox prefHeight="25.999900000002526" prefWidth="462.0">
+                <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Statistics for User: " />
+                  <Text fx:id="userIdField" strokeType="OUTSIDE" strokeWidth="0.0" />
+                </children>
+              </HBox>
+            </children>
+          </VBox>
+        </top>
+      </BorderPane>
+      <StackPane prefHeight="150.0" prefWidth="200.0">
+        <fx:include source="right.fxml" />
+      </StackPane>
+    </items>
+  </SplitPane>
+</StackPane>

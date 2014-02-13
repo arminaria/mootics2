@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns:fx="http://javafx.com/fxml/2.2/" fx:controller="modules.importWizard.controller.WizardController">
+    <Group>
+        <VBox>
+            <Button onAction="#gotoStep1" fx:id="menu_step_1">Step 1</Button>
+            <Label>import data from the page</Label>
+        </VBox>
+    </Group>
+    <Group>
+        <VBox>
+            <Button onAction="#gotoStep2" fx:id="menu_step_2">Step 2</Button>
+            <Label>import data from log file</Label>
+        </VBox>
+    </Group>
+    <Group>
+        <VBox>
+            <Button onAction="#gotoStep3" fx:id="menu_step_3">Step 3</Button>
+            <Label>import grades</Label>
+        </VBox>
+    </Group>
+
+</VBox>

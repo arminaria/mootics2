@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
+<VBox fx:controller="modules.userprofile.controller.NavigationController" xmlns:fx="http://javafx.com/fxml/2.2">
+    <Button text="gotoGraphs" onAction="#gotoGraphs"></Button>
+    <Button text="gotoStats"></Button>
+</VBox>

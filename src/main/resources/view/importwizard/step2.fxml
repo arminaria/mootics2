@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.text.Text?>
+
+<VBox alignment="CENTER" prefHeight="600.0" prefWidth="500.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="modules.importWizard.controller.DataImportController">
+  <Text text="Import Log Data From Moodle">
+    <VBox.margin>
+      <Insets bottom="50.0" fx:id="x1" />
+    </VBox.margin>
+  </Text>
+  <Text text="Please select the log file you want to import">
+    <VBox.margin>
+      <Insets bottom="5.0" />
+    </VBox.margin>
+  </Text>
+  <Button mnemonicParsing="false" onAction="#chooseFile" prefHeight="80.0" prefWidth="150.0" text="Choose Log File" />
+  <ProgressBar prefWidth="200.0" progress="0.0" fx:id="progressBar">
+    <VBox.margin>
+      <Insets top="10.0" />
+    </VBox.margin>
+  </ProgressBar>
+  <padding>
+    <Insets bottom="15.0" top="15.0" />
+  </padding>
+  <TextArea fx:id="output" editable="false" prefWidth="441.0">
+    <VBox.margin>
+      <Insets top="10.0" />
+    </VBox.margin>
+  </TextArea>
+</VBox>
