@@ -70,7 +70,7 @@ public class Graph {
     }
 
     public Canvas generate(){
-        Canvas canvas = new Canvas(500, 600);
+        Canvas canvas = new Canvas(1000, 1000);
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
         int y = y0;

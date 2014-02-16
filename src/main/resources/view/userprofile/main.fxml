@@ -13,24 +13,24 @@
     <items>
       <BorderPane>
         <center>
-          <StackPane >
-            <children>
-              <HBox prefHeight="100.0" prefWidth="200.0" fx:id="dataPane"/>
-            </children>
-          </StackPane>
+              <StackPane prefHeight="100.0" prefWidth="200.0" fx:id="dataPane"/>
         </center>
         <top>
           <VBox prefHeight="64.0" prefWidth="462.0">
             <children>
-              <HBox prefHeight="25.999900000002526" prefWidth="462.0">
+              <HBox prefHeight="25" prefWidth="462.0">
                 <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Statistics for User: " />
                   <Text fx:id="userIdField" strokeType="OUTSIDE" strokeWidth="0.0" />
                 </children>
               </HBox>
+                <Text fx:id="subtitle"  ></Text>
             </children>
           </VBox>
         </top>
+          <bottom>
+              <HBox fx:id="bottom"></HBox>
+          </bottom>
       </BorderPane>
       <StackPane prefHeight="150.0" prefWidth="200.0">
         <fx:include source="right.fxml" />
