@@ -53,4 +53,11 @@ public class DataDAO {
         q.setParameter("before", before);
         return q.getResultList();
     }
+
+    public Long getClickCount(User user) {
+        TypedQuery<Long> q = db.em().createQuery("SELECT count(d) from Data d where d.user = :user", Long.class);
+        q.setParameter("user", user);
+        return q.getResultList().get(0);
+
+    }
 }

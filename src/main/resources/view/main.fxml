@@ -12,6 +12,10 @@
                             <items>
                                 <MenuItem mnemonicParsing="false" text="Import Wizard"
                                           onAction="#gotoImportWizard"/>
+                                <MenuItem mnemonicParsing="false" text="UserProfile"
+                                onAction="#gotoUserProfile"/>
+                                <MenuItem mnemonicParsing="false" text="Statistics"
+                                onAction="#gotoStatistics"/>
                                 <MenuItem mnemonicParsing="false" text="Backup"
                                           onAction="#gotoBackUp"/>
                             </items>

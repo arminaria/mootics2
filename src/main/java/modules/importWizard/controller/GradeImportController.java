@@ -9,6 +9,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.stage.FileChooser;
 import model.Grade;
+import model.GradeName;
 import model.User;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
@@ -84,7 +85,13 @@ public class GradeImportController implements Initializable {
                             log.info("userid: {}, {}:" + value, userId, name);
 
                             Grade grade = new Grade();
-                            grade.setName(name);
+
+                            GradeName gradeName = new GradeName();
+                            gradeName.setName(name);
+                            gradeDAO.save(gradeName);
+
+                            grade.setName(gradeDAO.findGradeName(gradeName));
+
                             grade.setValue(value);
                             User user = userDAO.find(userId);
                             if (user == null) {

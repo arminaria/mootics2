@@ -12,6 +12,7 @@
         <class>model.Data</class>
         <class>model.Grade</class>
         <class>model.User</class>
+        <class>model.GradeName</class>
         <properties>
             <property name="hibernate.connection.driver_class" value="org.h2.Driver" />
             <property name="hibernate.connection.url" value="jdbc:h2:.db" />

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="modules.statistik.StatistikController">
+  <center>
+    <StackPane fx:id="chartPane" prefHeight="150.0" prefWidth="200.0" />
+  </center>
+  <left>
+    <Accordion>
+      <expandedPane>
+        <TitledPane fx:id="x1" animated="false" text="Grade">
+          <content>
+            <ListView fx:id="GradeListView" prefHeight="200.0" prefWidth="200.0" />
+          </content>
+        </TitledPane>
+      </expandedPane>
+      <panes>
+        <TitledPane animated="false" text="User">
+          <content>
+            <ListView fx:id="userListView" prefHeight="200.0" prefWidth="200.0" />
+          </content>
+          <graphic>
+            <Button fx:id="btnAllUser" mnemonicParsing="false" onAction="#selectAllUser" text="All" />
+          </graphic>
+        </TitledPane>
+        <TitledPane animated="false" text="Filter">
+          <content>
+            <ListView fx:id="FilterListView" prefHeight="200.0" prefWidth="200.0" />
+          </content>
+        </TitledPane>
+        <fx:reference source="x1" />
+      </panes>
+    </Accordion>
+  </left>
+  <top>
+    <VBox alignment="CENTER" prefHeight="53.0" prefWidth="586.0">
+      <children>
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Statistiks" />
+        <Text fx:id="subtitle" scaleX="1.0" scaleY="0.9999999999607461" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
+      </children>
+    </VBox>
+  </top>
+</BorderPane>

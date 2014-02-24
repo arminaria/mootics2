@@ -10,8 +10,8 @@ public class Grade {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
-    @Column
-    private String name;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private GradeName name;
     @Column
     private double value;
 
@@ -31,11 +31,11 @@ public class Grade {
         this.user = user;
     }
 
-    public String getName() {
+    public GradeName getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(GradeName name) {
         this.name = name;
     }
 

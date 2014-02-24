@@ -85,4 +85,9 @@ public class MainController {
         changeMain("/view/userprofile/main.fxml");
         changeLeft("/view/userprofile/left.fxml");
     }
+
+    public void gotoStatistics() {
+        changeMain("/view/statistik/main.fxml");
+        hideLeft();
+    }
 }
