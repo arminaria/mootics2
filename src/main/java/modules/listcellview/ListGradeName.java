@@ -1,4 +1,4 @@
-package modules.statistik;
+package modules.listcellview;
 
 import javafx.scene.control.ListCell;
 import model.GradeName;

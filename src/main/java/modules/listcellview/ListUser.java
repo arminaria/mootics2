@@ -1,4 +1,4 @@
-package modules.userprofile.model;
+package modules.listcellview;
 
 import javafx.scene.control.ListCell;
 import model.User;
