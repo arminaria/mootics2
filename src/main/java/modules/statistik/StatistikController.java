@@ -7,11 +7,8 @@ import dao.UserDAO;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.Axis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
@@ -25,14 +22,12 @@ import javafx.util.Callback;
 import model.Grade;
 import model.GradeName;
 import model.User;
-import modules.userprofile.model.ListUser;
-import org.hsqldb.lib.StringComparator;
+import modules.listcellview.ListGradeName;
+import modules.listcellview.ListUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.URL;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 

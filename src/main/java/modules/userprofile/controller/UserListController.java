@@ -8,7 +8,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.util.Callback;
 import model.User;
-import modules.userprofile.model.ListUser;
+import modules.listcellview.ListUser;
 import org.apache.poi.ss.formula.functions.T;
 
 import java.net.URL;
