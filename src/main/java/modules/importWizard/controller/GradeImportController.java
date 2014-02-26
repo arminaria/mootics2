@@ -57,63 +57,68 @@ public class GradeImportController implements Initializable {
             @Override
             protected Object call() throws IOException, InvalidFormatException {
 
-                UserDAO userDAO = new UserDAO();
-                GradeDAO gradeDAO = new GradeDAO();
-
-                Workbook wb = null;
                 try {
-                    wb = WorkbookFactory.create(file);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (InvalidFormatException e) {
-                    e.printStackTrace();
-                }
-                assert wb != null;
-                Sheet sheet = wb.getSheetAt(0);
+                    UserDAO userDAO = new UserDAO();
+                    GradeDAO gradeDAO = new GradeDAO();
 
-                Row firstRow = sheet.getRow(0);
-                int lastRow = sheet.getLastRowNum();
-                int lastCell = new Integer(firstRow.getLastCellNum()) - 1;
-
-                for (int row = 1; row <= lastRow; row++) {
-                    for (int column = 1; column <= lastCell; column++) {
-                        Cell currentCell = sheet.getRow(row).getCell(column);
-                        if (currentCell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
-                            Integer userId = new Double(sheet.getRow(row).getCell(0).getNumericCellValue()).intValue();
-                            String name = sheet.getRow(0).getCell(column).getStringCellValue();
-                            double value = currentCell.getNumericCellValue();
-                            log.info("userid: {}, {}:" + value, userId, name);
-
-                            Grade grade = new Grade();
-
-                            GradeName gradeName = new GradeName();
-                            gradeName.setName(name);
-                            gradeDAO.save(gradeName);
-
-                            grade.setName(gradeDAO.findGradeName(gradeName));
-
-                            grade.setValue(value);
-                            User user = userDAO.find(userId);
-                            if (user == null) {
-                                user = new User();
-                                user.setMoodleId(userId);
-                                userDAO.save(user);
-                            }
-                            grade.setUser(user);
-                            gradeDAO.save(grade);
-                        }
-                        updateProgress(row*column, lastRow * lastCell);
+                    Workbook wb = null;
+                    try {
+                        wb = WorkbookFactory.create(file);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (InvalidFormatException e) {
+                        e.printStackTrace();
                     }
-                }
+                    assert wb != null;
+                    Sheet sheet = wb.getSheetAt(0);
 
+                    Row firstRow = sheet.getRow(0);
+                    int lastRow = sheet.getLastRowNum();
+                    int lastCell = new Integer(firstRow.getLastCellNum()) - 1;
 
-                Platform.runLater(
-                        new Runnable() {
-                            public void run() {
-                                progressBar.setVisible(false);
+                    for (int row = 1; row <= lastRow; row++) {
+                        for (int column = 1; column <= lastCell; column++) {
+                            Cell currentCell = sheet.getRow(row).getCell(column);
+                            if (currentCell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
+                                Integer userId = new Double(sheet.getRow(row).getCell(0).getNumericCellValue()).intValue();
+                                String name = sheet.getRow(0).getCell(column).getStringCellValue();
+                                double value = currentCell.getNumericCellValue();
+                                log.info("userid: {}, {}:" + value, userId, name);
+
+                                Grade grade = new Grade();
+
+                                GradeName gradeName = new GradeName();
+                                gradeName.setName(name);
+                                gradeDAO.save(gradeName);
+
+                                grade.setName(gradeDAO.findGradeName(gradeName));
+
+                                grade.setValue(value);
+                                User user = userDAO.find(userId);
+                                if (user == null) {
+                                    user = new User();
+                                    user.setMoodleId(userId);
+                                    userDAO.save(user);
+                                }
+                                grade.setUser(user);
+                                gradeDAO.save(grade);
                             }
+                            updateProgress(row*column, lastRow * lastCell);
                         }
-                );
+                    }
+
+
+                    Platform.runLater(
+                            new Runnable() {
+                                public void run() {
+                                    progressBar.setVisible(false);
+                                }
+                            }
+                    );
+                } catch (Exception e) {
+                    log.error("Could not import Grade", e);
+                    System.exit(1);
+                }
 
                 return true;
             }

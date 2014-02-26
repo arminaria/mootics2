@@ -9,9 +9,11 @@ public class Data {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private int id;
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "userId")
     private User user;
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "materialId")
     private Material material;
     @Column
     @Temporal(TemporalType.TIMESTAMP)

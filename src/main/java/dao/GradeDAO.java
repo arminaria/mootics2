@@ -8,14 +8,12 @@ import model.User;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-public class GradeDAO {
+public class GradeDAO extends DAO{
     DBController db = DBController.getInstance();
 
     public void save(Grade g) {
         if(!isGradeInDB(g)){
-            db.start();
-            db.insert(g);
-            db.commit();
+            super.save(g);
         }
     }
 

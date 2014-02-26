@@ -5,6 +5,7 @@ import controller.DBController;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.control.TextArea;
+import model.Data;
 import model.Material;
 import modules.importWizard.Backend;
 import org.openqa.selenium.By;
@@ -19,12 +20,13 @@ import org.slf4j.LoggerFactory;
 import utils.CategoryUtil;
 import utils.RegexUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class CollectorController {
+public class MaterialImportController {
 
     public TextArea output;
-    Logger log = LoggerFactory.getLogger(CollectorController.class);
+    Logger log = LoggerFactory.getLogger(MaterialImportController.class);
 
     public void start() {
         output.appendText("Browser is starting, please wait ...\n");
@@ -68,6 +70,7 @@ public class CollectorController {
                 d.executeScript("document.getElementById(\"head\").insertAdjacentHTML('beforebegin', " +
                         "\"<center><h1 style='background:#f00'>Reading Data....</h1></center>\")");
 
+
                 List<WebElement> sections = d.findElements(By.xpath("//li[contains(@class,'section')]"));
                 for (WebElement section : sections) {
                     String id = section.getAttribute("id");
@@ -102,6 +105,8 @@ public class CollectorController {
                             }
                             log.info(material.toString());
                             output.appendText("found: " + material + "\n");
+
+                            material.setData(new ArrayList<Data>());
                             db.insert(material);
                         }
                     }

@@ -2,20 +2,23 @@ package dao;
 
 import controller.DBController;
 import model.Data;
+import model.GradeName;
 import model.User;
 
 import javax.persistence.TypedQuery;
 import java.util.Date;
 import java.util.List;
 
-public class DataDAO {
+public class DataDAO extends DAO{
     DBController db = DBController.getInstance();
+
+    public void insert(Data o) {
+        db.em().persist(o);
+    }
 
     public void save(Data d) {
         if(!dataInDb(d)){
-            db.start();
-            db.insert(d);
-            db.commit();
+            super.save(d);
         }
     }
 
@@ -54,7 +57,9 @@ public class DataDAO {
         return q.getResultList();
     }
 
-    public Long getClickCount(User user) {
+    public Long getClickCount(User user, GradeName gradeName) {
+        // find the
+
         TypedQuery<Long> q = db.em().createQuery("SELECT count(d) from Data d where d.user = :user", Long.class);
         q.setParameter("user", user);
         return q.getResultList().get(0);

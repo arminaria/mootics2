@@ -131,18 +131,15 @@ public class StatistikController implements Initializable {
         XYChart.Series<Number, Number> series = new XYChart.Series<Number, Number>();
 
         for (User user : users) {
-            Long clickCount = dataDAO.getClickCount(user);
-            System.out.println(clickCount);
-            Grade grade = null;
-            double gradeValue = 0;
             try {
-                grade = gradeDAO.getGrades(user, gradeName);
-                gradeValue = grade.getValue();
+                Long clickCount = dataDAO.getClickCount(user, gradeName);
+                Grade grade = gradeDAO.getGrades(user, gradeName);
+                double gradeValue = grade.getValue();
+                XYChart.Data<Number, Number> dataPoint = new XYChart.Data<Number, Number>(clickCount, gradeValue);
+                series.getData().add(dataPoint);
             } catch (Exception e) {
-                log.warn("No grade for this test");
+                log.warn("User {} did not participate in test {} ", user.getMoodleId() , gradeName.getName());
             }
-            XYChart.Data<Number, Number> dataPoint = new XYChart.Data<Number, Number>(clickCount, gradeValue);
-            series.getData().add(dataPoint);
 
         }
 

@@ -1,15 +1,15 @@
 package dao;
 
 import controller.DBController;
+import model.Material;
 import model.User;
 
 import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAO {
+public class UserDAO extends DAO{
 
-    DBController db = DBController.getInstance();
     public static List<User> users = new ArrayList<User>();
 
     public User find(int userId) {
@@ -23,9 +23,9 @@ public class UserDAO {
     }
 
     public void save(User user) {
-        db.start();
-        db.insert(user);
-        db.commit();
+        if(find(user.getMoodleId()) == null){
+            super.save(user);
+        }
     }
 
     public List<User> getAllUser() {
@@ -35,5 +35,9 @@ public class UserDAO {
         }
 
         return users;
+    }
+
+    public void insert(User user) {
+            db.em().persist(user);
     }
 }

@@ -15,7 +15,7 @@ public class GradeName {
     @Column(unique = true)
     private String name;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "name")
     private List<Grade> grades;
 
     public int getId() {
