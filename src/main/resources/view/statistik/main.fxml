@@ -1,18 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="modules.statistik.StatistikController">
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2"
+            fx:controller="modules.statistik.StatistikController">
   <center>
-    <StackPane fx:id="chartPane" prefHeight="150.0" prefWidth="200.0" />
+    <StackPane fx:id="chartPane" prefHeight="150.0" prefWidth="200.0">
+      <children>
+        <ScatterChart id="ScatterChart" fx:id="chart">
+          <xAxis>
+            <NumberAxis side="BOTTOM"/>
+          </xAxis>
+          <yAxis>
+            <NumberAxis side="LEFT" />
+          </yAxis>
+        </ScatterChart>
+      </children>
+    </StackPane>
   </center>
   <left>
     <Accordion>
       <expandedPane>
-        <TitledPane fx:id="x1" animated="false" text="Grade">
+        <TitledPane fx:id="x1" animated="true" text="Grade">
           <content>
             <ListView fx:id="GradeListView" prefHeight="200.0" prefWidth="200.0" />
           </content>
@@ -26,11 +39,6 @@
           <graphic>
             <Button fx:id="btnAllUser" mnemonicParsing="false" onAction="#selectAllUser" text="All" />
           </graphic>
-        </TitledPane>
-        <TitledPane animated="false" text="Filter">
-          <content>
-            <ListView fx:id="FilterListView" prefHeight="200.0" prefWidth="200.0" />
-          </content>
         </TitledPane>
         <fx:reference source="x1" />
       </panes>

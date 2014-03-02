@@ -83,7 +83,7 @@ public class MainController {
 
     public void gotoUserProfile() {
         changeMain("/view/userprofile/main.fxml");
-        changeLeft("/view/userprofile/left.fxml");
+        hideLeft();
     }
 
     public void gotoStatistics() {

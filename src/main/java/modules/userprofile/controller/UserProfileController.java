@@ -2,143 +2,142 @@ package modules.userprofile.controller;
 
 import dao.DataDAO;
 import dao.MaterialDAO;
+import dao.UserDAO;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
+import javafx.util.Callback;
 import model.Data;
 import model.Material;
 import model.User;
+import modules.listcellview.ListUser;
 import modules.userprofile.Graph;
 import modules.userprofile.Vertex;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.net.URL;
+import java.util.*;
 
-public class UserProfileController {
+public class UserProfileController implements Initializable {
     public static User currentUser;
-    public static Text subtitle;
+    public ListView<User> userList;
+    public Text title;
+    public StackPane main;
+
+    private static Map<User,List<List<Data>>> userSessionList = new HashMap<User, List<List<Data>>>();
+    public ToolBar subButtons;
+
     Logger log = LoggerFactory.getLogger(UserProfileController.class);
-    public static Text userIdField;
-    public Text text = new Text("");
-    @FXML
-    public static Pane dataPane;
-    @FXML
-    public static HBox bottom;
-    private List<List<Data>> weeklyData;
-    private Date minDate;
-    private Date maxDate;
 
 
-    public void init() {
-        DataDAO dataDAO = new DataDAO();
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        // fill UserList
+        List<User> allUser = new UserDAO().getAllUser();
+        userList.getItems().addAll(allUser);
+        userList.setCellFactory(new Callback<ListView<User>, ListCell<User>>() {
+            @Override
+            public ListCell<User> call(ListView<User> userListView) {
+                return new ListUser();
+            }
+        });
+        userList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<User>() {
+            @Override
+            public void changed(ObservableValue observableValue, User o, User o2) {
+                currentUser = o2;
+                update();
+            }
+        });
+        userList.getSelectionModel().select(0);
 
 
-        maxDate = dataDAO.getMaxDate();
-        minDate = dataDAO.getMinDate();
+    }
 
-        log.info(maxDate.toString());
-        log.info(minDate.toString());
+    private void update() {
+        title.setText(currentUser.getMoodleId().toString());
+    }
 
-        Calendar start = Calendar.getInstance();
-        start.setTime(minDate);
+    public void showUserGraph(ActionEvent actionEvent) {
 
-        weeklyData = new ArrayList<List<Data>>();
-        while (start.getTime().before(maxDate)) {
-            Calendar end = Calendar.getInstance();
-            end.setTime(start.getTime());
-            end.add(Calendar.DATE, 7);
-            List<Data> dataForUser = dataDAO.getDataForUser(currentUser, start.getTime(), end.getTime());
-            start.setTime(end.getTime());
-            weeklyData.add(dataForUser);
-        }
+        List<Data> data = currentUser.getData();
+        System.out.println(data.size());
+        final List<List<Data>> lists = splitDataBySession(data, new ArrayList<List<Data>>());
+        userSessionList.put(currentUser,lists);
 
-        bottom.getChildren().clear();
-        for (int i = 1; i <= weeklyData.size(); i++) {
-            Button button = new Button("w " + String.valueOf(i));
+        for(int i = 0; i<lists.size();i++){
+            Button btn = new Button(String.valueOf(i));
             final int finalI = i;
-            button.setOnAction(new EventHandler<ActionEvent>() {
+            btn.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
-                    showWeek(finalI);
+                    updateGraph(lists.get(finalI));
                 }
-            }
-            );
-            bottom.getChildren().add(button);
-        }
+            });
+            subButtons.getItems().add(btn);
 
-        showWeek(1);
+        }
 
     }
 
-    private void showWeek(int i) {
-        MaterialDAO materialDAO = new MaterialDAO();
+    private void updateGraph(List<Data> data) {
+        MaterialDAO mDAO = new MaterialDAO();
+        List<String> categories = mDAO.getCategories();
 
-        List<String> categories = materialDAO.getCategories();
-
-        List<Data> dataForUser = weeklyData.get(i - 1);
-
-        List<Material> flow = new ArrayList<Material>();
-        for (Data data : dataForUser) {
-            flow.add(data.getMaterial());
-        }
-        Canvas graph = createNodes(categories, flow);
-
-        dataPane.getChildren().clear();
-
-        Calendar start = Calendar.getInstance();
-        Calendar end = Calendar.getInstance();
-
-        start.setTime(minDate);
-        start.add(Calendar.DATE, 7 * i);
-
-        end.setTime(start.getTime());
-        start.add(Calendar.DATE, 7);
-
-        subtitle.setText(start.getTime() + " -- " + end.getTime());
+        Graph graph = new Graph(categories, data);
 
         ScrollPane scrollPane = new ScrollPane();
-        scrollPane.setContent(graph);
-        dataPane.getChildren().add(scrollPane);
-
-
+        Canvas graphCanvas = graph.generate();
+        scrollPane.setContent(graphCanvas);
+        scrollPane.setFitToHeight(true);
+        scrollPane.setFitToWidth(true);
+        main.getChildren().clear();
+        main.getChildren().add(scrollPane);
     }
 
-
-    private Canvas createNodes(List<String> nodes, List<Material> flow) {
-
-        Graph graph = new Graph();
-        for (String node : nodes) {
-            graph.addNode(new Vertex(node));
+    private List<List<Data>> splitDataBySession(List<Data> data, List<List<Data>> result) {
+        if(userSessionList.containsKey(currentUser)) return userSessionList.get(currentUser);
+        if (data == null || data.isEmpty()) {
+            return result;
+        }
+        if (data.size() == 1) {
+            result.add(data);
+            return result;
         }
 
-        for (int i = 0; i < flow.size() - 1; i++) {
-            try {
-                Material m1 = flow.get(i);
-                Material m2 = flow.get(i + 1);
+        List<Data> partialData = new ArrayList<Data>();
 
-                String c1 = m1.getCategory();
-                String c2 = m2.getCategory();
+        int pointer = -1;
 
-                Vertex from = new Vertex(c1);
-                Vertex to = new Vertex(c2);
-                if (!from.equals(to))
-                    graph.addEdge(from, to);
-            } catch (NullPointerException ignore) {
-
+        for (int i = 0; i < data.size() - 1; i++) {
+            Data c = data.get(i);
+            Data n = data.get(i + 1);
+            partialData.add(c);
+            if (Math.abs(c.getDate().getTime() - n.getDate().getTime()) > 24 * 60 * 60 * 1000) {
+                result.add(partialData);
+                pointer = i + 1;
+                break;
             }
         }
 
-        return graph.generate();
+        if(pointer == -1){
+            result.add(data);
+            return splitDataBySession(null, result);
+        }
+
+        return splitDataBySession(data.subList(pointer, data.size()), result);
 
     }
+
+
+
 }

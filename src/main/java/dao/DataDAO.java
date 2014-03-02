@@ -3,6 +3,7 @@ package dao;
 import controller.DBController;
 import model.Data;
 import model.GradeName;
+import model.Material;
 import model.User;
 
 import javax.persistence.TypedQuery;
@@ -25,6 +26,7 @@ public class DataDAO extends DAO{
     public boolean dataInDb(Data data) {
         TypedQuery<Data> q = db.em().createQuery("SELECT d from Data d where d.date=:date and d.user=:user", Data.class);
         q.setParameter("date", data.getDate());
+
         q.setParameter("user", data.getUser());
         q.setMaxResults(1);
         if(q.getResultList().isEmpty())return false;
@@ -58,11 +60,42 @@ public class DataDAO extends DAO{
     }
 
     public Long getClickCount(User user, GradeName gradeName) {
-        // find the
+        if(gradeName.getName().contains("Course total")){
+            return new Long(user.getData().size());
+        }
+        // find the material for the grade
+        TypedQuery<Material> query = db.em().createQuery("SELECT m From Material m where m.name=:name", Material.class);
+        query.setParameter("name", getMaterialNameFrom(gradeName));
+        query.setMaxResults(1);
+        List<Material> resultList = query.getResultList();
+        if(resultList.isEmpty()){
+            return new Long(0);
+        }
+        Material material = resultList.get(0);
 
-        TypedQuery<Long> q = db.em().createQuery("SELECT count(d) from Data d where d.user = :user", Long.class);
+        // get the section for the grade
+        String section = material.getSection();
+
+        // get date of the last attempt
+        TypedQuery<Date> queryDate = db.em().createQuery("SELECT max (d.date) from Data d where d.user =:user " +
+                "and material.name=:materialName", Date.class);
+        queryDate.setParameter("user", user);
+        queryDate.setParameter("materialName", getMaterialNameFrom(gradeName));
+        queryDate.setMaxResults(1);
+        Date date = queryDate.getResultList().get(0);
+
+
+        // find the clicks before last attempt in the section
+        TypedQuery<Long> q = db.em().createQuery("SELECT count(d) from Data d where d.user = :user " +
+                "and d.material.section=:section and d.date <= :date", Long.class);
         q.setParameter("user", user);
-        return q.getResultList().get(0);
+        q.setParameter("section", section);
+        q.setParameter("date",date);
 
+        return q.getResultList().get(0);
+    }
+
+    private String getMaterialNameFrom(GradeName gradeName){
+        return gradeName.getName().split(":")[1].trim();
     }
 }
