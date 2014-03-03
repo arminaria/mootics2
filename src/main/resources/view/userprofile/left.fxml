@@ -1,7 +1,0 @@
-<?import javafx.scene.control.*?>
-
-<ListView xmlns:fx="http://javafx.com/fxml/2.2/"
-          fx:controller="modules.userprofile.controller.UserListController"
-          fx:id="userList" >
-
-</ListView>
