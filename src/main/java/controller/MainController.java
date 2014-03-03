@@ -90,4 +90,14 @@ public class MainController {
         changeMain("/view/statistik/main.fxml");
         hideLeft();
     }
+
+    public void gotoWeeklyUsage() {
+        changeMain("/view/weeklyusage/main.fxml");
+        hideLeft();
+    }
+
+    public void gotoMonthlyUsage() {
+        changeMain("/view/monthlyusage/main.fxml");
+        hideLeft();
+    }
 }

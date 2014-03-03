@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.chart.StackedBarChart?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<StackPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2"
+           fx:controller="modules.monthlyusage.MonthlyUsageController">
+    <SplitPane dividerPositions="0.1" focusTraversable="true" prefHeight="160.0" prefWidth="200.0">
+        <items>
+            <ListView fx:id="userList" prefHeight="100.0" prefWidth="100.0">
+            </ListView>
+            <StackPane prefHeight="150.0" prefWidth="200.0">
+                <children>
+                    <BorderPane>
+                        <center>
+                            <StackPane fx:id="main">
+                                <Text text="Please select a user"></Text>
+                            </StackPane>
+                        </center>
+                        <top>
+                            <VBox>
+                                <ToolBar>
+                                    <items>
+                                        <Text fx:id="title" strokeType="OUTSIDE" strokeWidth="0.0" text="Options"/>
+                                        <Button mnemonicParsing="false" text="Show for All Users" onAction="#selectAll"/>
+                                    </items>
+                                </ToolBar>
+                                <ToolBar fx:id="subButtons"/>
+                            </VBox>
+                        </top>
+                    </BorderPane>
+                </children>
+            </StackPane>
+        </items>
+    </SplitPane>
+</StackPane>

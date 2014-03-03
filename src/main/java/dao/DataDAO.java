@@ -78,7 +78,7 @@ public class DataDAO extends DAO{
 
         // get date of the last attempt
         TypedQuery<Date> queryDate = db.em().createQuery("SELECT max (d.date) from Data d where d.user =:user " +
-                "and material.name=:materialName", Date.class);
+                "and (material.name=:materialName)", Date.class);
         queryDate.setParameter("user", user);
         queryDate.setParameter("materialName", getMaterialNameFrom(gradeName));
         queryDate.setMaxResults(1);
@@ -87,7 +87,7 @@ public class DataDAO extends DAO{
 
         // find the clicks before last attempt in the section
         TypedQuery<Long> q = db.em().createQuery("SELECT count(d) from Data d where d.user = :user " +
-                "and d.material.section=:section and d.date <= :date", Long.class);
+                "and (d.material.section=:section or d.material.section is null or d.material.section='section-0') and d.date <= :date", Long.class);
         q.setParameter("user", user);
         q.setParameter("section", section);
         q.setParameter("date",date);

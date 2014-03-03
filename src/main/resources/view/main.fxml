@@ -16,6 +16,8 @@
                                 onAction="#gotoUserProfile"/>
                                 <MenuItem mnemonicParsing="false" text="Statistics"
                                 onAction="#gotoStatistics"/>
+                                <MenuItem mnemonicParsing="false" text="Weekly Usage"
+                                          onAction="#gotoWeeklyUsage"/>
                                 <MenuItem mnemonicParsing="false" text="Backup"
                                           onAction="#gotoBackUp"/>
                             </items>
