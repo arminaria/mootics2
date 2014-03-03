@@ -11,7 +11,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
@@ -20,6 +23,7 @@ import model.GradeName;
 import model.User;
 import modules.listcellview.ListGradeName;
 import modules.listcellview.ListUser;
+import org.apache.commons.math3.stat.regression.SimpleRegression;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,6 +45,8 @@ public class StatistikController implements Initializable {
     public Button btnAllUser;
     public Text subtitle;
     public ScatterChart<Number, Number> chart;
+    public Text r2;
+    public Text regressionEQ;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -119,6 +125,7 @@ public class StatistikController implements Initializable {
 
         DataDAO dataDAO = new DataDAO();
         GradeDAO gradeDAO = new GradeDAO();
+        SimpleRegression regression = new SimpleRegression();
 
         XYChart.Series<Number, Number> series = new XYChart.Series<Number, Number>();
         series.setName(gradeName.getName());
@@ -127,6 +134,7 @@ public class StatistikController implements Initializable {
                 Long clickCount = dataDAO.getClickCount(user, gradeName);
                 Grade grade = gradeDAO.getGrades(user, gradeName);
                 double gradeValue = grade.getValue();
+                regression.addData(clickCount, gradeValue);
                 XYChart.Data<Number, Number> dataPoint = new XYChart.Data<Number, Number>(clickCount, gradeValue);
                 series.getData().add(dataPoint);
             } catch (Exception e) {
@@ -135,6 +143,9 @@ public class StatistikController implements Initializable {
         }
         chart.getYAxis().setLabel("Grade in " + gradeName.getName());
         chart.getXAxis().setLabel("Actions in the Section for the user before last attempt");
+
+        regressionEQ.setText(regression.getIntercept() + "+" + regression.getSlope() + "x");
+        r2.setText(String.valueOf(regression.getRSquare()));
 
         chart.getData().clear();
         chart.getData().add(series);
