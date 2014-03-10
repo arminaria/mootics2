@@ -12,18 +12,28 @@
            fx:controller="modules.userprofile.controller.UserProfileController">
     <SplitPane dividerPositions="0.1" focusTraversable="true" prefHeight="160.0" prefWidth="200.0">
         <items>
-            <ListView prefHeight="100.0" prefWidth="100.0" fx:id="userList"/>
+            <BorderPane>
+                <top>
+                    <Button text="Select All" onAction="#selectAll"></Button>
+                </top>
+                <center>
+                    <ListView prefHeight="100.0" prefWidth="100.0" fx:id="userList"/>
+                </center>
+            </BorderPane>
             <StackPane prefHeight="150.0" prefWidth="200.0">
                 <children>
                     <BorderPane>
                         <top>
                             <VBox>
-                            <ToolBar>
-                                <items>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" fx:id="title"/>
-                                    <Button mnemonicParsing="false" text="UserGraph" onAction="#showUserGraph"/>
-                                </items>
-                            </ToolBar>
+                                <ToolBar>
+                                    <items>
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" fx:id="title"/>
+                                        <Button mnemonicParsing="false" text="Activity Graph"
+                                                onAction="#showUserGraph"/>
+                                        <Button mnemonicParsing="false" text="Weekly Usage"
+                                                onAction="#showWeeklyUsage"/>
+                                    </items>
+                                </ToolBar>
                                 <ToolBar fx:id="subButtons">
                                 </ToolBar>
                             </VBox>

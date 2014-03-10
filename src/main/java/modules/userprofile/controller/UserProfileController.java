@@ -5,11 +5,17 @@ import dao.MaterialDAO;
 import dao.UserDAO;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.StackedBarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -33,15 +39,19 @@ public class UserProfileController implements Initializable {
     public ListView<User> userList;
     public Text title;
     public StackPane main;
-
+    String[] weekDays = {"So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"};
     private static Map<User,List<List<Data>>> userSessionList = new HashMap<User, List<List<Data>>>();
     public ToolBar subButtons;
+    public View currentView;
+    public enum View {
+        USER_GRAPH, WEEKLY_USAGE
+    }
 
     Logger log = LoggerFactory.getLogger(UserProfileController.class);
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        userList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         // fill UserList
         List<User> allUser = new UserDAO().getAllUser();
         userList.getItems().addAll(allUser);
@@ -58,22 +68,31 @@ public class UserProfileController implements Initializable {
                 update();
             }
         });
+        currentView = View.USER_GRAPH;
         userList.getSelectionModel().select(0);
-
-
     }
 
     private void update() {
         title.setText(currentUser.getMoodleId().toString());
+        switch (currentView){
+            case USER_GRAPH:
+                showUserGraph(null);
+                break;
+            case WEEKLY_USAGE:
+                showWeeklyUsage(null);
+                break;
+            default:showWeeklyUsage(null);
+        }
+
     }
 
     public void showUserGraph(ActionEvent actionEvent) {
-
+        this.currentView = View.USER_GRAPH;
         List<Data> data = currentUser.getData();
-        System.out.println(data.size());
         final List<List<Data>> lists = splitDataBySession(data, new ArrayList<List<Data>>());
         userSessionList.put(currentUser,lists);
 
+        subButtons.getItems().clear();
         for(int i = 0; i<lists.size();i++){
             Button btn = new Button(String.valueOf(i));
             final int finalI = i;
@@ -84,7 +103,7 @@ public class UserProfileController implements Initializable {
                 }
             });
             subButtons.getItems().add(btn);
-
+            updateGraph(lists.get(0));
         }
 
     }
@@ -139,5 +158,61 @@ public class UserProfileController implements Initializable {
     }
 
 
+    public void showWeeklyUsage(ActionEvent actionEvent) {
+        this.currentView = View.WEEKLY_USAGE;
 
+        ObservableList<User> selectedItems = userList.getSelectionModel().getSelectedItems();
+
+        CategoryAxis xAxis = new CategoryAxis();
+        xAxis.setCategories(FXCollections.<String>observableArrayList(
+                Arrays.asList(weekDays)));
+
+        NumberAxis yAxis = new NumberAxis();
+
+        StackedBarChart<String, Number> barChart = new StackedBarChart<String, Number>(
+                xAxis, yAxis
+        );
+
+        main.getChildren().clear();
+
+        MaterialDAO mDAO = new MaterialDAO();
+        List<String> categories = mDAO.getCategories();
+        for (String category : categories) {
+            XYChart.Series<String, Number> s = new XYChart.Series<String, Number>();
+            s.setName(category);
+            for (int i = 1; i <= weekDays.length; i++) {
+                String weekDay = weekDays[i - 1];
+                int clicks = 0;
+                for (User current : selectedItems) {
+                    clicks += getClickCountOfDay(i, current.getData(), category);
+                }
+                XYChart.Data<String, Number> point = new XYChart.Data<String, Number>(weekDay, clicks);
+                s.getData().add(point);
+            }
+            barChart.getData().add(s);
+        }
+        main.getChildren().add(barChart);
+    }
+
+    public int getClickCountOfDay(int weekDay, List<Data> data, String category) {
+        int count = 0;
+        for (Data d : data) {
+            Date date = d.getDate();
+            Calendar c = Calendar.getInstance();
+            c.setTime(date);
+            int day = c.get(Calendar.DAY_OF_WEEK);
+            Material material = d.getMaterial();
+            if (material != null) {
+                if (day == weekDay && material.getCategory().equals(category)) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+
+    public void selectAll(ActionEvent actionEvent) {
+        userList.getSelectionModel().selectAll();
+    }
 }
