@@ -1,7 +1,6 @@
 package dao;
 
-import controller.DBController;
-import model.Data;
+import javafx.collections.ObservableList;
 import model.Material;
 
 import javax.persistence.TypedQuery;
@@ -26,5 +25,18 @@ public class MaterialDAO extends DAO{
 
     public void insert(Material material) {
             db.em().persist(material);
+    }
+
+    public List<Material> getAllMaterialForCategories(ObservableList<String> categories) {
+        StringBuilder query = new StringBuilder("select m from Material m where ");
+        for (int i = 0; i < categories.size(); i++) {
+            String category = categories.get(i);
+            query.append("m.category='"+category+"' ");
+            if(!(i+1==categories.size())){
+                query.append("or ");
+            }
+        }
+        TypedQuery<Material> q = db.em().createQuery(query.toString(), Material.class);
+        return q.getResultList();
     }
 }

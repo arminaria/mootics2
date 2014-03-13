@@ -24,6 +24,8 @@
                                           onAction="#gotoMonthlyUsage"/>
                                 <MenuItem mnemonicParsing="false" text="Statistics"
                                           onAction="#gotoStatistics"/>
+                                <MenuItem mnemonicParsing="false" text="Correlations"
+                                          onAction="#gotoStatistics"/>
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Help">
