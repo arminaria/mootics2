@@ -1,9 +1,11 @@
 package modules.importWizard.controller;
 
+import controller.MainController;
 import dao.GradeDAO;
 import dao.UserDAO;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
@@ -126,6 +128,12 @@ public class GradeImportController implements Initializable {
         };
 
     }
+    public void gotoImportMaterials(ActionEvent actionEvent) {
+        new MainController().changeMain("/view/importwizard/step1.fxml");
+    }
 
+    public void gotoImportLogs(ActionEvent actionEvent) {
+        new MainController().changeMain("/view/importwizard/step2.fxml");
+    }
 
 }

@@ -2,8 +2,10 @@ package modules.importWizard.controller;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import controller.DBController;
+import controller.MainController;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
 import javafx.scene.control.TextArea;
 import model.Data;
 import model.Material;
@@ -123,7 +125,7 @@ public class MaterialImportController {
                 Platform.runLater(
                         new Runnable() {
                             public void run() {
-                                new WizardController().changeStep(2);
+                                //new WizardController().changeStep(2);
                             }
                         }
                 );
@@ -152,4 +154,11 @@ public class MaterialImportController {
         return material;
     }
 
+    public void gotoImportLogs(ActionEvent actionEvent) {
+        new MainController().changeMain("/view/importwizard/step2.fxml");
+    }
+
+    public void gotoImportGrades(ActionEvent actionEvent) {
+        new MainController().changeMain("/view/importwizard/step3.fxml");
+    }
 }

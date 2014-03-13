@@ -9,31 +9,34 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.Group?>
 <VBox alignment="CENTER"
-      xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2"
+      xmlns:fx="http://javafx.com/fxml"
       fx:controller="modules.importWizard.controller.GradeImportController">
     <Text text="Import Log Data From Moodle">
         <VBox.margin>
-            <Insets bottom="50.0" fx:id="x1" />
+            <Insets bottom="50.0" fx:id="x1"/>
         </VBox.margin>
     </Text>
     <Text text="Please select the Grade  file you want to import">
         <VBox.margin>
-            <Insets bottom="5.0" />
+            <Insets bottom="5.0"/>
         </VBox.margin>
     </Text>
-    <Button mnemonicParsing="false" onAction="#chooseFile" prefHeight="80.0" prefWidth="150.0" text="Choose Log File" />
+    <Button mnemonicParsing="false" onAction="#chooseFile" prefHeight="80.0" prefWidth="150.0" text="Choose Grade File To Import"/>
     <ProgressBar prefWidth="200.0" progress="0.0" fx:id="progressBar">
         <VBox.margin>
-            <Insets top="10.0" />
+            <Insets top="10.0"/>
         </VBox.margin>
     </ProgressBar>
     <padding>
-        <Insets bottom="15.0" top="15.0" />
+        <Insets bottom="15.0" top="15.0"/>
     </padding>
     <TextArea fx:id="output" editable="false" prefWidth="441.0">
         <VBox.margin>
-            <Insets top="10.0" />
+            <Insets top="10.0"/>
         </VBox.margin>
     </TextArea>
+    <Button text="Import Materials" onAction="#gotoImportMaterials"></Button>
+    <Button text="Import Logs" onAction="#gotoImportLogs"></Button>
 </VBox>

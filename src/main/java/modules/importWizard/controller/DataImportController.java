@@ -1,11 +1,12 @@
 package modules.importWizard.controller;
 
-import controller.DBController;
+import controller.MainController;
 import dao.DataDAO;
 import dao.MaterialDAO;
 import dao.UserDAO;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
@@ -13,7 +14,6 @@ import javafx.stage.FileChooser;
 import model.Data;
 import model.Material;
 import model.User;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,9 +21,7 @@ import utils.CategoryUtil;
 import utils.RegexUtils;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -131,7 +129,7 @@ public class DataImportController implements Initializable{
                             new Runnable() {
                                 public void run() {
                                     progressBar.setVisible(false);
-                                    new WizardController().changeStep(3);
+                                    //new WizardController().changeStep(3);
                                 }
                             }
                     );
@@ -147,6 +145,14 @@ public class DataImportController implements Initializable{
 
         };
 
+    }
+
+    public void gotoImportMaterials(ActionEvent actionEvent) {
+        new MainController().changeMain("/view/importwizard/step1.fxml");
+    }
+
+    public void gotoImportGrades(ActionEvent actionEvent) {
+        new MainController().changeMain("/view/importwizard/step3.fxml");
     }
 
 

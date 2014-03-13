@@ -4,7 +4,7 @@
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
-<VBox xmlns:fx="http://javafx.com/fxml/2.2/" fx:controller="modules.importWizard.controller.WizardController">
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="modules.importWizard.controller.WizardController">
     <Group>
         <VBox>
             <Button onAction="#gotoStep1" fx:id="menu_step_1">Step 1</Button>

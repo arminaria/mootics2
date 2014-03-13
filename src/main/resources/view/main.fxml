@@ -1,6 +1,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<BorderPane prefHeight="438.0" prefWidth="586.0" xmlns:fx="http://javafx.com/fxml/2.2"
+<BorderPane prefHeight="438.0" prefWidth="586.0" xmlns:fx="http://javafx.com/fxml"
             fx:controller="controller.MainController">
     <!-- Menu -->
     <top>
@@ -36,19 +36,5 @@
             </children>
         </VBox>
     </top>
-
-
-    <center>
-        <BorderPane>
-            <left>
-                <StackPane prefHeight="268.0" prefWidth="100.0" fx:id="left"/>
-            </left>
-            <center>
-                <StackPane fx:id="main">
-                </StackPane>
-            </center>
-
-        </BorderPane>
-    </center>
 
 </BorderPane>

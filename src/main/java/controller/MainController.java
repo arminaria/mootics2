@@ -1,9 +1,9 @@
 package controller;
 
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,10 +11,7 @@ import java.io.File;
 import java.net.URL;
 
 public class MainController {
-    @FXML
-    public static Pane left;
-    @FXML
-    public static Pane main;
+    public static StackPane main;
 
     private static Logger log = LoggerFactory.getLogger(MainController.class);
 
@@ -35,21 +32,10 @@ public class MainController {
         }
     }
 
-    private void hideLeft(){
-        left.setPrefSize(0,0);
-    }
-
-    private void showLeft(){
-        left.setPrefSize(100,100);
-    }
-
     public void changeMain(String mainFxml) {
         change(main, getContent(mainFxml));
     }
 
-    public void changeLeft(String fxml) {
-        change(left, getContent(fxml));
-    }
 
     protected void change(Pane pane, Parent content) {
         pane.getChildren().clear();
@@ -63,46 +49,37 @@ public class MainController {
 
     public void gotoTest2() {
         changeMain("/view/test2.fxml");
-        showLeft();
     }
 
     public void gotoImportWizard() {
         changeMain("/view/importwizard/importMain.fxml");
-        hideLeft();
     }
 
     public void gotoCollector() {
         changeMain("/view/collector.fxml");
-        hideLeft();
     }
 
     public void gotoBackUp() {
         changeMain("/view/backup/backupMain.fxml");
-        hideLeft();
     }
 
     public void gotoUserProfile() {
         changeMain("/view/userprofile/main.fxml");
-        hideLeft();
     }
 
     public void gotoStatistics() {
         changeMain("/view/statistik/main.fxml");
-        hideLeft();
     }
 
     public void gotoWeeklyUsage() {
         changeMain("/view/weeklyusage/main.fxml");
-        hideLeft();
     }
 
     public void gotoMonthlyUsage() {
         changeMain("/view/monthlyusage/main.fxml");
-        hideLeft();
     }
 
-    public void gotoKorellation() {
+    public void gotoCorrelation() {
         changeMain("/view/correlation/main.fxml");
-        hideLeft();
     }
 }

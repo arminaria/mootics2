@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane xmlns:fx="http://javafx.com/javafx/2.2"
+<StackPane xmlns:fx="http://javafx.com/fxml"
            fx:controller="modules.userprofile.controller.UserProfileController">
     <SplitPane dividerPositions="0.1" focusTraversable="true" prefHeight="160.0" prefWidth="200.0">
         <items>

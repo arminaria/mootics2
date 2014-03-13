@@ -4,23 +4,21 @@ import controller.MainController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.StackPane;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
-public class WizardController extends MainController implements Initializable{
+public class WizardController extends MainController {
 
 
     public SplitPane splitPane;
     @FXML
-    public static Button backBtn;
+    public Button backBtn;
     @FXML
-    public static Button forwardBtn;
-    @FXML
+    public Button forwardBtn;
+
     public static StackPane step;
 
     private static int currentPage = 0;
@@ -28,14 +26,11 @@ public class WizardController extends MainController implements Initializable{
     public Button menu_step_2;
     public Button menu_step_3;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        if(currentPage==0){
-            changeStep(1);
-        }
-    }
+    Logger log = LoggerFactory.getLogger(MainController.class);
 
     public void changeStep(int page){
+
+        log.info("changeStep "+step);
         // change the content
         change(step, getContent("/view/importwizard/step" + page + ".fxml"));
         currentPage = page;
@@ -85,5 +80,14 @@ public class WizardController extends MainController implements Initializable{
     }
     public void gotoStep3() {
         changeStep(3);
+    }
+
+    public void forward(ActionEvent actionEvent) {
+        changeStep(currentPage+1);
+    }
+
+    public void back(ActionEvent actionEvent) {
+        changeStep(currentPage-1);
+
     }
 }

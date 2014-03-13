@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.text.Text?>
-
-<VBox alignment="CENTER" prefHeight="600.0" prefWidth="500.0" xmlns:fx="http://javafx.com/fxml/1"
-      xmlns="http://javafx.com/javafx/2.2" fx:controller="modules.importWizard.controller.MaterialImportController">
+<VBox alignment="CENTER" prefHeight="600.0" prefWidth="500.0"
+      xmlns:fx="http://javafx.com/fxml" fx:controller="modules.importWizard.controller.MaterialImportController">
     <Text text="Gather Material Information">
         <VBox.margin>
             <Insets bottom="50.0" fx:id="x1"/>
@@ -22,12 +19,14 @@
         </VBox.margin>
     </Text>
     <Text text="Start Browser with the Button and follow the instructions at the top of the page." VBox.margin="$x1"/>
-    <Button mnemonicParsing="false" onAction="#start" prefHeight="80.0" prefWidth="150.0" text="Start Browser"/>
+    <Button mnemonicParsing="false" onAction="#start" prefHeight="80.0" prefWidth="150.0" text="Start Browser To Import Materials"/>
     <TextArea fx:id="output" editable="false">
         <VBox.margin>
             <Insets top="10.0"/>
         </VBox.margin>
     </TextArea>
+    <Button text="Import Logs" onAction="#gotoImportLogs"></Button>
+    <Button text="Import Grades" onAction="#gotoImportGrades"></Button>
     <padding>
         <Insets bottom="15.0" top="15.0"/>
     </padding>

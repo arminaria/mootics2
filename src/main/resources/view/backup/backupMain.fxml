@@ -8,7 +8,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="299.0" prefWidth="420.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="modules.backup.backupController">
+<BorderPane prefHeight="299.0" prefWidth="420.0" xmlns:fx="http://javafx.com/fxml" fx:controller="modules.backup.backupController">
   <bottom>
     <GridPane>
       <children>

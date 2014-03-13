@@ -6,31 +6,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<SplitPane fx:id="splitPane" dividerPositions="0.8" xmlns:fx="http://javafx.com/fxml/1"
-           xmlns="http://javafx.com/javafx/2.2"
+<SplitPane fx:id="splitPane" dividerPositions="0.8"
+           xmlns:fx="http://javafx.com/fxml"
            fx:controller="modules.importWizard.controller.WizardController">
     <items>
         <BorderPane prefHeight="200.0">
-            <bottom>
-                <GridPane alignment="CENTER" disable="false" BorderPane.alignment="CENTER">
-                    <children>
-                        <Button mnemonicParsing="false" text="Step Back" GridPane.columnIndex="0"
-                                GridPane.halignment="LEFT" GridPane.rowIndex="0" fx:id="backBtn"/>
-                        <Button alignment="TOP_RIGHT" mnemonicParsing="false" text="Step Forward" GridPane.columnIndex="1"
-                                GridPane.halignment="RIGHT" GridPane.rowIndex="0" fx:id="forwardBtn"/>
-                    </children>
-                    <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                    </columnConstraints>
-                    <padding>
-                        <Insets bottom="15.0" left="15.0" right="15.0"/>
-                    </padding>
-                    <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                    </rowConstraints>
-                </GridPane>
-            </bottom>
             <center>
                 <StackPane prefHeight="150.0" prefWidth="200.0" fx:id="step">
                     <fx:include source="step1.fxml"></fx:include>
@@ -45,8 +25,5 @@
                 </AnchorPane>
             </top>
         </BorderPane>
-        <VBox>
-            <fx:include source="importRight.fxml"/>
-        </VBox>
     </items>
 </SplitPane>

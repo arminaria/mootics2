@@ -8,7 +8,7 @@
 
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
-<StackPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2"
+<StackPane xmlns:fx="http://javafx.com/fxml"
            fx:controller="modules.monthlyusage.MonthlyUsageController">
     <SplitPane dividerPositions="0.1" focusTraversable="true" prefHeight="160.0" prefWidth="200.0">
         <items>

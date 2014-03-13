@@ -6,8 +6,8 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.scene.Group?>
-<StackPane xmlns="http://javafx.com/javafx/8"
-           xmlns:fx="http://javafx.com/fxml/1" fx:controller="modules.correlation.CorrelationController">
+<StackPane xmlns:fx="http://javafx.com/javafx"
+            fx:controller="modules.correlation.CorrelationController">
     <HBox>
         <ListView fx:id="categoryList" prefWidth="100"></ListView>
         <ListView fx:id="gradesList" prefWidth="150"></ListView>

@@ -1,3 +1,62 @@
-.maxHeight{
-    height: 100%;
+.root {
+    -fx-font-family: "Candara";
+    -fx-font-size: 12.070967741935487px;
+    -fx-base: #000000;
+    -fx-background: #FFFFFF;
+    -fx-focus-color: #DFC70F;
+    -fx-control-inner-background: #000000;
+    -fx-inner-border: linear-gradient(to bottom, derive(-fx-color,100.0%) 0%, derive(-fx-color,36.400000000000006%) 100%);
+    -fx-body-color: linear-gradient( to bottom, derive(-fx-color, 100.0%) 0%, derive(-fx-color, -6.0%) 100%);
+    -fx-outer-border: derive(-fx-color,50.5084745762712%);
+    -fx-shadow-highlight-color: derive(-fx-background,100.0%);
+    -fx-text-box-border: derive(-fx-background,100.0%);
+}
+.button, .toggle-button, .choice-box {
+    -fx-background-radius: 30, 30, 29, 28;
+    -fx-padding: 15px 22px 15px 22px;
+}
+.menu-button {
+    -fx-background-radius: 30, 30, 29, 28;
+}
+.menu-button .label {
+    -fx-padding: 15px 30px 15px 22px;
+}
+.menu-button .arrow-button {
+    -fx-padding: 15px 18px 15px 0px;
+}
+.choice-box {
+    -fx-padding: 0 18px 0 0;
+}
+.choice-box .label {
+    -fx-padding: 15px 16px 15px 18px;
+}
+.choice-box .open-button {
+    -fx-padding: 1 0 0 20px;
+}
+.combo-box-base:editable .text-field, .combo-box-base .arrow-button, .combo-box .list-cell {
+    -fx-padding: 15px 18px 15px 18px;
+}
+.check-box .box {
+    -fx-padding: 0.25em;
+}
+.radio-button .radio {
+    -fx-padding: 0.333333em;
+}
+.label, .check-box, .radio-button {
+    -fx-text-fill: -fx-text-background-color;
+}
+.button, .toggle-button, .check-box .box, .radio-button .radio, .choice-box, .menu-button, .tab, .combo-box-base {
+    -fx-background-insets: 0 0 -1 0, 0, 0, 1;
+}
+.button:focused, .toggle-button:focused, .check-box:focused .box, .radio-button:focused .radio, .choice-box:focused, .menu-button:focused, .combo-box-base:focused {
+    -fx-background-insets: -1.4, 0, 0, 1;
+}
+.combo-box-base .arrow-button {
+    -fx-background-insets: 0, 0, 1;
+}
+.choice-box .label { /* Workaround for RT-20015 */
+    -fx-text-fill: -fx-text-base-color;
+}
+.menu-button .label { /* Workaround for RT-20015 */
+    -fx-text-fill: -fx-text-base-color;
 }

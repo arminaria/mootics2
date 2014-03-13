@@ -6,8 +6,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<BorderPane prefHeight="479.0" prefWidth="683.0" xmlns:fx="http://javafx.com/fxml/1"
-            xmlns="http://javafx.com/javafx/2.2" fx:controller="modules.statistik.StatistikController">
+<BorderPane prefHeight="479.0" prefWidth="683.0"
+            xmlns:fx="http://javafx.com/fxml" fx:controller="modules.statistik.StatistikController">
     <center>
     <StackPane fx:id="chartPane" prefHeight="150.0" prefWidth="200.0">
       <children>
