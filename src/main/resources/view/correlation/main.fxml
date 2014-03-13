@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.Group?>
+<StackPane xmlns="http://javafx.com/javafx/8"
+           xmlns:fx="http://javafx.com/fxml/1" fx:controller="modules.correlation.CorrelationController">
+    <HBox>
+        <ListView fx:id="categoryList" prefWidth="100"></ListView>
+        <ListView fx:id="gradesList" prefWidth="150"></ListView>
+        <VBox>
+            <Group style="-fx-background-color:#ff0000">
+            </Group>
+
+            <GridPane>
+
+            </GridPane>
+        </VBox>
+    </HBox>
+</StackPane>

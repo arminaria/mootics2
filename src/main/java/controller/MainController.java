@@ -100,4 +100,9 @@ public class MainController {
         changeMain("/view/monthlyusage/main.fxml");
         hideLeft();
     }
+
+    public void gotoKorellation() {
+        changeMain("/view/correlation/main.fxml");
+        hideLeft();
+    }
 }

@@ -26,6 +26,6 @@ public class Mootics extends Application {
         stage.setScene(scene);
         stage.setTitle("Mootics");
         stage.show();
-        new MainController().gotoMonthlyUsage();
+        new MainController().gotoKorellation();
     }
 }

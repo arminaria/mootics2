@@ -61,10 +61,6 @@ public class GradeName {
 
     @Override
     public String toString() {
-        return "GradeName{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", grades=" + grades +
-                '}';
+        return name;
     }
 }
