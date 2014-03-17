@@ -25,7 +25,9 @@
                                 <MenuItem mnemonicParsing="false" text="Statistics"
                                           onAction="#gotoStatistics"/>
                                 <MenuItem mnemonicParsing="false" text="Correlations"
-                                          onAction="#gotoStatistics"/>
+                                          onAction="#gotoCorrelation"/>
+                                <MenuItem mnemonicParsing="false" text="Wighted Video Watch"
+                                          onAction="#gotoMatterhorn"/>
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Help">

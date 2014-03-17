@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="438.0" prefWidth="586.0" xmlns:fx="http://javafx.com/fxml"
+            xmlns="http://javafx.com/javafx/8" fx:controller="modules.matterhorn.MatterhornController">
+
+<center><StackPane fx:id="pane" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+</center>
+</BorderPane>

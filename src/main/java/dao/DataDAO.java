@@ -1,10 +1,7 @@
 package dao;
 
 import controller.DBController;
-import model.Data;
-import model.GradeName;
-import model.Material;
-import model.User;
+import model.*;
 
 import javax.persistence.TypedQuery;
 import java.util.Date;
@@ -97,5 +94,13 @@ public class DataDAO extends DAO{
 
     private String getMaterialNameFrom(GradeName gradeName){
         return gradeName.getName().split(":")[1].trim();
+    }
+
+    public List<Data> getVideoData(User user, Matterhorn matterhorn) {
+        TypedQuery<Data> q = db.em().
+                createQuery("SELECT d FROM Data d WHERE d.user=:user and d.material.category='Video' and d.material.id =:materialId", Data.class);
+        q.setParameter("user", user);
+        q.setParameter("materialId", matterhorn.getMaterial().getId());
+        return q.getResultList();
     }
 }

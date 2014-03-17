@@ -82,4 +82,12 @@ public class MainController {
     public void gotoCorrelation() {
         changeMain("/view/correlation/main.fxml");
     }
+
+    public void gotoMatterhorn() {
+        changeMain("/view/matterhorn/main.fxml");
+    }
+
+    public void gotoMatterhornVerify() {
+        changeMain("/view/matterhorn/verify.fxml");
+    }
 }

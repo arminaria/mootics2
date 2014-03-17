@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="438.0" prefWidth="586.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="modules.matterhorn.MatterhornVerifyController">
+
+<center><StackPane fx:id="pane" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+</center>
+<left><ListView prefHeight="438.0" prefWidth="300" BorderPane.alignment="CENTER" fx:id="videoList"/>
+</left>
+</BorderPane>

@@ -42,7 +42,11 @@ public class GradeDAO extends DAO{
     private boolean isGradeNameInDB(GradeName gradeName) {
         return findGradeName(gradeName) != null;
     }
-
+    public GradeName findGradeName(String gradeName) {
+        GradeName gn = new GradeName();
+        gn.setName(gradeName);
+        return findGradeName(gn);
+    }
     public GradeName findGradeName(GradeName gradeName) {
         TypedQuery<GradeName> query =
                 db.em().createQuery("SELECT g from GradeName g where g.name=:name ", GradeName.class);

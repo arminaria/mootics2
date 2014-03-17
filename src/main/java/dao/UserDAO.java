@@ -1,6 +1,7 @@
 package dao;
 
 import controller.DBController;
+import model.Data;
 import model.Material;
 import model.User;
 
@@ -40,4 +41,6 @@ public class UserDAO extends DAO{
     public void insert(User user) {
             db.em().persist(user);
     }
+
+
 }
