@@ -90,4 +90,8 @@ public class MainController {
     public void gotoMatterhornVerify() {
         changeMain("/view/matterhorn/verify.fxml");
     }
+
+    public void gotoEndSurvey() {
+        changeMain("/view/endsurvey/main.fxml");
+    }
 }
